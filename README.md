@@ -4,14 +4,19 @@
 Studi Kasus
 Mini Project Praktikum Prog. Web 2024/2025 GENAP
 Anda diminta untuk membuat sebuah website yang dapat digunakan untuk mencari dan mengajukan lamaran pekerjaan secara online di Indonesia. Website ini akan membantu para pencari kerja menemukan lowongan pekerjaan berdasarkan berbagai kriteria, serta memungkinkan perusahaan untuk mengunggah dan mengelola lowongan pekerjaan mereka.
-Website akan menampilkan daftar lowongan kerja yang akan berlangsung yang berisi informasi, kurang lebih:
+
+Website akan menampilkan daftar lowongan kerja yang akan berlangsung 
+yang berisi informasi, kurang lebih:
+
 1. Logo Perusahaan
 2. Kategori Pekerjaan (IT, Keuangan, Pendidikan, dll.)
 3. Nama Perusahaan
 4. Nama Pekerjaan
 5. Jenis Pekerjaan (Full-time, Part-time, Remote, Freelance)
 6. Gaji
+
 Ketika pencari kerja memilih suatu lowongan, website akan menampilkan informasi detail mengenai pekerjaan tersebut, antara lain:
+
 1. Logo Perusahaan
 2. Nama Perusahaan
 3. Lokasi (Alamat lengkap)
