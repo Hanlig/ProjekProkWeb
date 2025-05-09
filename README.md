@@ -39,21 +39,27 @@ membuat sebuah website statis dengan HTML dan CSS (tidak diperbolehkan menggunak
 
 a. Pada halaman utama terdapat pilihan untuk pencarian. Misal berdasarkan Nama
 Perusahaan, Kategori Pekerjaan, Lokasi, Jenis Pekerjaan, dan Rentang Gaji
+
 b. Halaman utama akan menampilkan semua pilihan lowongan pekerjaan yang tersedia di sebuah perusahaan. Pada halaman ini akan menampilkan informasi
 penting saja seperti yang sudah ditulis diatas.
+
 c. Pada halaman ini harus ada hyperlink yang mengacu ke halaman detail
 lowongan pekerjaan tersebut.
 
 2. Halaman Detail
    
 a. Halaman Detail berisi informasi lengkap mengenai lowongan pekerjaan dengan format yang rapi.
+
 b. Pada halaman ini harus ada hyperlink untuk kembali ke halaman utama.
+
 c. Halaman juga harus memiliki layout terdiri dari 2 atau 3 kolom.
+
 d. Pada halaman ini pencari kerja terdapat hyperlink/tombol untuk mengajukan lamaran dan akan menuju ke halaman Pengajuan Lamaran
 
 4. Halaman Pengajuan Lamaran
    
 a. Pencari kerja akan melihat detail pekerjaan yang ingin dilamar sebelum mengisi formulir.
+
 b. Saat pencari kerja ingin melamar suatu posisi, mereka akan mengisi formulir dengan data berikut:
 
 i. Nama Lengkap
