@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pengajuan Lamaran - Web Developer</title>
+  <link rel="stylesheet" href="/css/stylelamarkerja.css" />
+</head>
+<body>
+  <!-- Header Sinkron -->
+  <header class="login-header">
+    <div class="container">
+      <a href="index.html" class="back-button">
+        <img src="/IMAGE/icont back.png" alt="Back" class="back-icon" />
+      </a>
+      <a href="logout.html">logout</a>
+      <div class="logo">
+        <img src="/IMAGE/batch-logo-removebg-preview.png" alt="logo-web" width="50px" height="100px">
+      </div>
+    </div>
+  </header>
+
+  <main class="login-main">
+    <div class="login-wrapper">
+      <div class="job-apply-section">
+        <h2>Web Developer - ABC Tech</h2>
+        <section class="job-detail">
+          <div class="col">
+            <h3>Detail Pekerjaan</h3>
+            <p><strong>Perusahaan:</strong> ABC Tech</p>
+            <p><strong>Kategori:</strong> IT</p>
+            <p><strong>Lokasi:</strong> Jakarta</p>
+            <p><strong>Jenis Pekerjaan:</strong> Full-Time</p>
+            <p><strong>Rentang Gaji:</strong> Rp 10.000.000 - Rp 15.000.000</p>
+            <p><strong>Deskripsi:</strong></p>
+            <p>Mencari Web Developer yang berpengalaman dalam HTML, CSS, JavaScript, serta mampu bekerja dalam tim dan memenuhi deadline proyek.</p>
+          </div>
+
+          <div class="col">
+            <h3>Formulir Pengajuan Lamaran</h3>
+            <form action="#" method="post" enctype="multipart/form-data" novalidate>
+              <label for="fullname">Nama Lengkap <span class="required">*</span></label>
+              <input type="text" id="fullname" name="fullname" required placeholder="Nama lengkap Anda" />
+
+              <label for="birthdate">Tanggal Lahir <span class="required">*</span></label>
+              <input type="date" id="birthdate" name="birthdate" required />
+
+              <label for="email">Email <span class="required">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="email@example.com" />
+
+              <label for="phone">Nomor HP <span class="required">*</span></label>
+              <input type="tel" id="phone" name="phone" required placeholder="081234567890" pattern="[0-9]{8,15}" />
+
+              <label for="cv">CV (PDF) <span class="required">*</span></label>
+              <input type="file" id="cv" name="cv" accept="application/pdf" required />
+
+              <label for="portfolio">Portofolio (PDF, opsional)</label>
+              <input type="file" id="portfolio" name="portfolio" accept="application/pdf" />
+
+              <label for="coverletter">Surat Lamaran (opsional)</label>
+              <textarea id="coverletter" name="coverletter" rows="5" placeholder="Tulis surat lamaran Anda di sini..."></textarea>
+
+              <button type="submit">Kirim Lamaran</button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Sinkron -->
+  <footer class="login-footer">
+    <div class="container">
+      <p><u>Web by Hanli-71220875 & Dandy - 71220873</u></p>
+    </div>
+  </footer>
+</body>
+</html>
