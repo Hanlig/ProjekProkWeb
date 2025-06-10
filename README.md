@@ -2,86 +2,170 @@
 
 ![GitHub contributors](https://img.shields.io/github/contributors/Hanlig/ProjekProkWeb)
 
-**MINI PROJEK 1**
-Studi Kasus
-Mini Project Praktikum Prog. Web 2024/2025 GENAP
-Anda diminta untuk membuat sebuah website yang dapat digunakan untuk mencari dan mengajukan lamaran pekerjaan secara online di Indonesia. Website ini akan membantu para pencari kerja menemukan lowongan pekerjaan berdasarkan berbagai kriteria, serta memungkinkan perusahaan untuk mengunggah dan mengelola lowongan pekerjaan mereka.
+<div align="center">
 
-Website akan menampilkan daftar lowongan kerja yang akan berlangsung 
-yang berisi informasi, kurang lebih:
+<img src="IMAGE/batch-logo-removebg-preview.png" alt="Logo Proyek" width="150"/>
 
-1. Logo Perusahaan
-2. Kategori Pekerjaan (IT, Keuangan, Pendidikan, dll.)
-3. Nama Perusahaan
-4. Nama Pekerjaan
-5. Jenis Pekerjaan (Full-time, Part-time, Remote, Freelance)
-6. Gaji
+# **Portal Lowongan Pekerjaan**
 
-Ketika pencari kerja memilih suatu lowongan, website akan menampilkan informasi detail mengenai pekerjaan tersebut, antara lain:
+Sebuah platform pencarian kerja dinamis yang menghubungkan talenta dengan peluang. Dibangun dengan PHP native, proyek ini menyediakan fungsionalitas inti untuk portal pekerjaan modern.
 
-1. Logo Perusahaan
-2. Nama Perusahaan
-3. Lokasi (Alamat lengkap)
-4. Nama Pekerjaan
-5. Kategori Pekerjaan
-6. Deskripsi Pekerjaan
-7. Syarat & Kualifikasi
-8. Jenis Pekerjaan
-9. Gaji
-10. Tanggal Batas Lamaran
-    
-Selanjutnya pencari kerja dapat melamar pekerjaan terhadap lowongan yang tersedia. Pada halaman lamaran, pencari kerja akan memasukkan data diri dan dokumen yang diperlukan. Pada website ini memiliki 2 (dua) pengguna yaitu: Pencari Kerja dan Perusahaan.
+[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/Overview.en.html)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://html.spec.whatwg.org/multipage/)
 
-**Instruksi**
+</div>
 
-Mini Project #1 dilakukan secara berkelompok yang terdiri atas 3 orang (tidak boleh lebih). Pilih anggota kelompok dengan baik karena akan berlanjut hingga Mini Project #2. Anda akan memakai hasil Mini Project #1 untuk Mini Project #2. Pada Mini Project #1, anda diminta untuk
-membuat sebuah website statis dengan HTML dan CSS (tidak diperbolehkan menggunakan template) yang memiliki 3 halaman dengan ketentuan:
+---
 
-1. Halaman 
+> Misi kami adalah menciptakan jembatan digital antara perusahaan dan para pencari kerja di Indonesia, mempermudah proses rekrutmen dan pencarian karir.
 
-a. Pada halaman utama terdapat pilihan untuk pencarian. Misal berdasarkan Nama
-Perusahaan, Kategori Pekerjaan, Lokasi, Jenis Pekerjaan, dan Rentang Gaji
+<br>
 
-b. Halaman utama akan menampilkan semua pilihan lowongan pekerjaan yang tersedia di sebuah perusahaan. Pada halaman ini akan menampilkan informasi
-penting saja seperti yang sudah ditulis diatas.
+## 📋 Daftar Isi
 
-c. Pada halaman ini harus ada hyperlink yang mengacu ke halaman detail
-lowongan pekerjaan tersebut.
+- [Tentang Proyek](#-tentang-proyek)
+- [Galeri](#-galeri)
+- [Fitur Utama](#-fitur-utama)
+- [Teknologi](#-teknologi)
+- [Panduan Instalasi](#-panduan-instalasi)
+- [Struktur Database](#-struktur-database)
+- [Roadmap](#-roadmap)
+- [Kontributor](#-kontributor)
 
-2. Halaman Detail
-   
-a. Halaman Detail berisi informasi lengkap mengenai lowongan pekerjaan dengan format yang rapi.
+---
 
-b. Pada halaman ini harus ada hyperlink untuk kembali ke halaman utama.
+## 🌟 Tentang Proyek
 
-c. Halaman juga harus memiliki layout terdiri dari 2 atau 3 kolom.
+Portal Lowongan Pekerjaan ini adalah aplikasi web yang dirancang untuk menjadi solusi lengkap bagi proses rekrutmen. Aplikasi ini memungkinkan perusahaan untuk mempublikasikan lowongan dan membantu pencari kerja menemukan pekerjaan impian mereka. Proyek ini dibangun dari dasar menggunakan **PHP Native**, menunjukkan pemahaman fundamental tentang pengembangan web sisi server.
 
-d. Pada halaman ini pencari kerja terdapat hyperlink/tombol untuk mengajukan lamaran dan akan menuju ke halaman Pengajuan Lamaran
+### ✨ Galeri
 
-4. Halaman Pengajuan Lamaran
-   
-a. Pencari kerja akan melihat detail pekerjaan yang ingin dilamar sebelum mengisi formulir.
+<table>
+  <tr>
+    <td align="center"><strong>Halaman Utama</strong></td>
+    <td align="center"><strong>Detail Lowongan</strong></td>
+  </tr>
+  <tr>
+    <td><img src="https://via.placeholder.com/400x300.png?text=Halaman+Utama" alt="Halaman Utama"></td>
+    <td><img src="https://via.placeholder.com/400x300.png?text=Halaman+Detail" alt="Halaman Detail"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Halaman Login</strong></td>
+    <td align="center"><strong>Formulir Lamaran</strong></td>
+  </tr>
+  <tr>
+    <td><img src="https://via.placeholder.com/400x300.png?text=Halaman+Login" alt="Halaman Login"></td>
+    <td><img src="https://via.placeholder.com/400x300.png?text=Formulir+Lamaran" alt="Halaman Lamaran"></td>
+  </tr>
+</table>
 
-b. Saat pencari kerja ingin melamar suatu posisi, mereka akan mengisi formulir dengan data berikut:
+---
 
-i. Nama Lengkap
-ii. Tanggal Lahir
-iii. Email
-iv. Nomor HP
-v. CV (dalam format PDF)
-vi. Portofolio (opsional, dalam format PDF)
-vii. Surat Lamaran (opsional)
+## 🚀 Fitur Utama
 
-6. Login
-   
-a. Siapkan lokasi atau halaman untuk login. Hal ini dimaksudkan karena website ini memiliki 2 (dua) pengguna yaitu: Pencari Kerja dan Perusahaan.
-b. Login berupa username dan password
+-   **🔍 Pencarian & Filter Canggih:** Temukan lowongan berdasarkan kata kunci, kategori, dan lokasi.
+-   **👤 Sistem Pengguna Berbasis Peran:**
+    -   **Pencari Kerja**: Bisa menjelajahi dan melamar lowongan.
+    -   **Perusahaan**: Bisa memposting dan mengelola lowongan.
+-   **📄 Proses Lamaran Mudah:** Formulir aplikasi yang intuitif dengan fitur unggah CV dan portofolio.
+-   **🔐 Keamanan Terjamin:** Proses autentikasi aman menggunakan `password_verify` dan manajemen sesi yang handal.
+-   **🚫 Anti Lamaran Ganda:** Sistem secara cerdas mencegah pengguna melamar pekerjaan yang sama lebih dari sekali.
+-   **⏰ Lowongan Aktif:** Hanya menampilkan pekerjaan yang masih dalam periode lamaran.
 
-CATATAN
+---
 
-1. Pastikan pada setiap halaman terdapat header dan footer yang konsisten.
-2. Gunakan data yang real.
-3. Tidak menggunakan frameworks apapun. Menggunakan CSS murni.
-4. Halaman website bersifat statis.
-5. CSS external, bukan INLINE.
-6. Buatlah hanya 3 HALAMAN HTML SAJA.
+## 🛠️ Teknologi
+
+Berikut adalah teknologi utama yang menjadi fondasi proyek ini:
+
+| Teknologi                                                                                                 | Deskripsi                                 |
+| --------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| [**PHP**](https.php.net)                                                                                | Bahasa utama untuk logika backend.        |
+| [**MySQL**](https://mysql.com)                                                                            | Sistem manajemen database relasional.     |
+| [**HTML5**](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)                                | Markup standar untuk membuat halaman web. |
+| [**CSS3**](https://developer.mozilla.org/en-US/docs/Web/CSS)                                              | Styling untuk mempercantik tampilan.      |
+
+---
+
+## ⚙️ Panduan Instalasi
+
+Ikuti langkah-langkah ini untuk menjalankan proyek secara lokal.
+
+1.  **Prasyarat**
+    -   Pastikan Anda memiliki web server lokal seperti [XAMPP](https://www.apachefriends.org/index.html) atau [WAMP](http://www.wampserver.com/en/).
+    -   Akses ke phpMyAdmin atau *database client* lainnya.
+
+2.  **Clone Proyek**
+    ```sh
+    git clone https://URL_REPOSITORI_ANDA.git
+    cd nama_folder_proyek
+    ```
+
+3.  **Setup Database**
+    -   Buka phpMyAdmin.
+    -   Buat database baru dengan nama `db_job_portal`.
+    -   Impor file `.sql` Anda ke dalam database ini untuk membuat semua tabel yang diperlukan.
+
+4.  **Konfigurasi Koneksi**
+    -   Buka file `db.php`.
+    -   Sesuaikan detail koneksi dengan konfigurasi server lokal Anda.
+        ```php
+        $db_host = 'localhost';
+        $db_user = 'root';
+        $db_pass = '';
+        $db_name = 'db_job_portal';
+        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name, 3307); // Sesuaikan port jika perlu
+        ```
+
+5.  **Buat Folder `uploads`**
+    -   Di dalam direktori utama proyek, buat sebuah folder baru bernama `uploads`.
+        ```sh
+        mkdir uploads
+        ```
+    -   Folder ini akan digunakan untuk menyimpan CV dan portofolio yang diunggah pelamar.
+
+6.  **Jalankan Proyek**
+    -   Letakkan folder proyek di dalam direktori web server Anda (`htdocs` atau `www`).
+    -   Buka browser dan kunjungi `http://localhost/nama_folder_proyek/`.
+
+---
+
+## 🗄️ Struktur Database
+
+Proyek ini menggunakan beberapa tabel utama untuk mengelola data:
+
+-   `users`: Menyimpan data login pengguna (email, password, peran).
+-   `perusahaan`: Menyimpan detail perusahaan (nama, lokasi, logo).
+-   `pencari_kerja`: Menyimpan profil pencari kerja (nama, tgl lahir, dll).
+-   `lowongan_pekerjaan`: Menyimpan semua detail lowongan pekerjaan.
+-   `lamaran`: Mencatat riwayat lamaran dari pencari kerja ke lowongan tertentu.
+
+---
+
+## 🗺️ Roadmap
+
+Berikut adalah beberapa ide fitur yang bisa dikembangkan selanjutnya untuk membuat platform ini lebih hebat:
+
+-   [ ] **Dashboard Perusahaan**: Halaman bagi perusahaan untuk melihat daftar pelamar di setiap lowongan.
+-   [ ] **Dashboard Pelamar**: Halaman bagi pencari kerja untuk melacak status lamaran mereka (dilihat, diproses, ditolak).
+-   [ ] **Notifikasi Email**: Mengirim email otomatis saat lamaran berhasil dikirim atau saat statusnya berubah.
+-   [ ] **Panel Admin**: Halaman super-user untuk mengelola semua data di platform.
+-   [ ] **Fitur "Simpan Lowongan"**: Memungkinkan pengguna menyimpan pekerjaan yang mereka minati.
+
+---
+
+## 🧑‍💻 Kontributor
+
+Proyek ini dikembangkan dengan penuh dedikasi oleh:
+
+| Nama       | NIM      |
+| ---------- | -------- |
+| **Hanli** | 71220875 |
+| **Dandy** | 71220873 |
+
+<br>
+<div align="center">
+Made with ❤️ in Indonesia
+</div>
