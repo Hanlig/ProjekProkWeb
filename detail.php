@@ -1,15 +1,32 @@
 <?php
-// ... (Kode PHP di awal tidak berubah) ...
 session_start();
 require_once 'db.php';
-// --- 1. Ambil ID Lowongan & Lakukan Validasi ---
+
+// --- 1. Ambil ID Lowongan & Validasi ---
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Error: ID lowongan tidak valid.");
 }
 $lowongan_id = intval($_GET['id']);
-// --- 2. Query untuk Mengambil Detail Lowongan ---
-$sql_lowongan = "SELECT lp.*, p.nama_perusahaan, p.lokasi, p.logo_perusahaan FROM lowongan_pekerjaan lp JOIN perusahaan p ON lp.perusahaan_id = p.id WHERE lp.id = ?";
-// ... (sisa kode PHP tidak berubah) ...
+
+// --- 2. Ambil data lowongan ---
+$sql_lowongan = "SELECT lp.*, p.nama_perusahaan, p.lokasi, p.logo_perusahaan 
+                 FROM lowongan_pekerjaan lp 
+                 JOIN perusahaan p ON lp.perusahaan_id = p.id 
+                 WHERE lp.id = ?";
+$stmt_lowongan = $conn->prepare($sql_lowongan);
+$stmt_lowongan->bind_param("i", $lowongan_id);
+$stmt_lowongan->execute();
+$result = $stmt_lowongan->get_result();
+
+if ($result->num_rows === 0) {
+    die("Lowongan tidak ditemukan.");
+}
+
+$lowongan = $result->fetch_assoc();
+
+// --- 3. Cek Role User & Status Lamaran (dummy logic sementara) ---
+$role_valid = true; // Ganti dengan logika cek role user sebenarnya
+$sudah_melamar = false; // Ganti dengan query cek apakah user sudah melamar
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -68,7 +85,7 @@ $sql_lowongan = "SELECT lp.*, p.nama_perusahaan, p.lokasi, p.logo_perusahaan FRO
                 <div class="apply-button">
                     <?php if (isset($_SESSION['user_id']) && $role_valid): ?>
                         <?php if ($sudah_melamar): ?>
-                            <p class="search-btn" style="background-color: #555; cursor: not-allowed;"><?php echo "Anda sudah pernah melamar LOWONGAN ini"; ?></p>
+                            <p class="search-btn" style="background-color: #555; cursor: not-allowed;">Anda sudah pernah melamar LOWONGAN ini</p>
                         <?php else: ?>
                             <a href="PengajuanLamaran.php?id=<?php echo $lowongan_id; ?>" class="search-btn">Ajukan Lamaran</a>
                         <?php endif; ?>

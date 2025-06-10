@@ -5,7 +5,7 @@ session_start();
 // Panggil file koneksi database
 require_once 'db.php';
 
-// ... (sisa kode PHP tidak berubah) ...
+// --- LOGIKA PENCARIAN BARU ---
 $sql = "SELECT 
             lp.id, 
             lp.nama_pekerjaan, 
@@ -19,11 +19,42 @@ $sql = "SELECT
         JOIN 
             perusahaan p ON lp.perusahaan_id = p.id
         WHERE 
-            lp.tanggal_batas_lamaran >= CURDATE()
-        ORDER BY 
-            lp.created_at DESC";
+            lp.tanggal_batas_lamaran >= CURDATE()";
 
-$result = $conn->query($sql);
+$params = [];
+$types = '';
+
+// Filter berdasarkan keyword (nama pekerjaan atau perusahaan)
+if (!empty($_GET['q'])) {
+    $keyword = '%' . $_GET['q'] . '%';
+    $sql .= " AND (lp.nama_pekerjaan LIKE ? OR p.nama_perusahaan LIKE ?)";
+    $types .= 'ss';
+    array_push($params, $keyword, $keyword);
+}
+
+// Filter berdasarkan kategori
+if (!empty($_GET['kategori'])) {
+    $sql .= " AND lp.kategori_pekerjaan = ?";
+    $types .= 's';
+    array_push($params, $_GET['kategori']);
+}
+
+// Filter berdasarkan lokasi
+if (!empty($_GET['lokasi'])) {
+    $sql .= " AND p.lokasi = ?";
+    $types .= 's';
+    array_push($params, $_GET['lokasi']);
+}
+
+$sql .= " ORDER BY lp.created_at DESC";
+
+$stmt = $conn->prepare($sql);
+if ($types) {
+    $stmt->bind_param($types, ...$params);
+}
+$stmt->execute();
+$result = $stmt->get_result();
+// --- AKHIR LOGIKA PENCARIAN ---
 
 ?>
 <!DOCTYPE html>
@@ -60,24 +91,26 @@ $result = $conn->query($sql);
                 <h1 class="section-title">Cari Lowongan Pekerjaan</h1>
                 <form class="search-form" action="index.php" method="GET">
                     <div class="form-group">
-                        <input type="text" name="q" placeholder="Nama Perusahaan atau Pekerjaan" class="form-input">
+                        <input type="text" name="q" placeholder="Nama Perusahaan atau Pekerjaan" class="form-input" value="<?php echo htmlspecialchars($_GET['q'] ?? ''); ?>">
                     </div>
                     
                     <div class="form-group">
                         <select class="form-select" name="kategori">
                             <option value="">Pilih Kategori</option>
-                            <option value="IT">IT</option>
-                            <option value="Desain">Desain</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Pendidikan">Pendidikan</option>
+                            <option value="IT" <?php if(($_GET['kategori'] ?? '') == 'IT') echo 'selected'; ?>>IT</option>
+                            <option value="Desain" <?php if(($_GET['kategori'] ?? '') == 'Desain') echo 'selected'; ?>>Desain</option>
+                            <option value="Marketing" <?php if(($_GET['kategori'] ?? '') == 'Marketing') echo 'selected'; ?>>Marketing</option>
+                            <option value="Pendidikan" <?php if(($_GET['kategori'] ?? '') == 'Pendidikan') echo 'selected'; ?>>Pendidikan</option>
+                            <option value="Akuntansi" <?php if(($_GET['kategori'] ?? '') == 'Akuntansi') echo 'selected'; ?>>Akuntansi</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
                         <select class="form-select" name="lokasi">
                             <option value="">Pilih Lokasi</option>
-                            <option value="Jakarta">Jakarta</option>
-                            <option value="Bandung">Bandung</option>
+                            <option value="Yogyakarta" <?php if(($_GET['lokasi'] ?? '') == 'Yogyakarta') echo 'selected'; ?>>Yogyakarta</option>
+                            <option value="Jakarta" <?php if(($_GET['lokasi'] ?? '') == 'Jakarta') echo 'selected'; ?>>Jakarta</option>
+                            <option value="Bandung" <?php if(($_GET['lokasi'] ?? '') == 'Bandung') echo 'selected'; ?>>Bandung</option>
                         </select>
                     </div>
                     
@@ -114,7 +147,7 @@ $result = $conn->query($sql);
                             </article>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <p style="text-align: center; grid-column: 1 / -1;">Saat ini tidak ada lowongan yang tersedia.</p>
+                        <p style="text-align: center; grid-column: 1 / -1;">Tidak ada lowongan yang cocok dengan kriteria pencarian Anda.</p>
                     <?php endif; ?>
                 </div>
             </section>
@@ -130,5 +163,6 @@ $result = $conn->query($sql);
 </html>
 <?php
 // Menutup koneksi database
+$stmt->close();
 $conn->close();
 ?>

@@ -3,9 +3,10 @@
 $db_host = 'localhost';     // Biasanya 'localhost'
 $db_user = 'root';          // Username database Anda
 $db_pass = '';              // Password database Anda
-$db_name = 'db_job_portal'; // Nama database yang telah dibuat
+$db_name = 'job_portal';   // Nama database yang telah dibuat
 
 // Membuat koneksi ke database menggunakan mysqli
+// Port tidak perlu ditulis jika menggunakan port default (3306)
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name, 3307);
 
 // Memeriksa apakah koneksi berhasil atau gagal
