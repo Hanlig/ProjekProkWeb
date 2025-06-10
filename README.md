@@ -1,4 +1,6 @@
-# ProjekProkWeb
+# Project ProkWeb
+
+![GitHub contributors](https://img.shields.io/github/contributors/Hanlig/ProjekProkWeb)
 
 **MINI PROJEK 1**
 Studi Kasus
