@@ -4,7 +4,7 @@ html, body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     min-height: 100vh;
-    background: url("/IMAGE/background.png") center center / cover no-repeat fixed;
+    background: url("../IMAGE/background.png") center center / cover no-repeat fixed;
     color: white;
     display: flex;
     flex-direction: column;
