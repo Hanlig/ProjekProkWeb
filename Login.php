@@ -23,23 +23,23 @@
     <div class="login-wrapper">
       <div class="welcome-side">
         <h1 class="welcome-text">Welcome!</h1>
-        <p class="welcome-desc">If you already have an account, please log in to access your dashboard. If you don't have an account, you can create one to get started.</p>
+        <p class="welcome-desc">Jika Anda sudah memiliki akun, silakan masuk untuk mengakses dasbor Anda. Jika Anda belum memiliki akun, Anda dapat membuatnya untuk memulai.</p>
         <div class="role-info">
           <div class="role-card">
             <i class="fas fa-user-tie"></i>
             <h3>Job Seeker</h3>
-            <p>Find your dream job and apply easily</p>
+            <p>Temukan pekerjaan impian Anda dan lamar dengan mudah</p>
           </div>
           <div class="role-card">
             <i class="fas fa-building"></i>
             <h3>Company</h3>
-            <p>Post jobs and manage applicants</p>
+            <p>Posting pekerjaan dan kelola pelamar</p>
           </div>
         </div>
       </div>
 
       <section class="login-section">
-        <h1 class="signin-title">HALO, LOGIN DI SINI</h1>
+        <h1 class="signin-title">Sign in</h1>
 
         <?php
         if (isset($_GET['error']) && $_GET['error'] == 1) {

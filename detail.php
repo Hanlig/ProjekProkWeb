@@ -29,7 +29,7 @@ $role_valid = false;
 $sudah_melamar = false;
 
 if ($user_logged_in) {
-    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'pencari_kerja') {
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Pencari Kerja') {
         $role_valid = true;
     }
 
