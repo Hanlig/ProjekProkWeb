@@ -5,7 +5,7 @@ session_start();
 // Panggil file koneksi database
 require_once 'db.php';
 
-// --- LOGIKA PENCARIAN BARU ---
+// --- Kueri SQL Diperbarui untuk mengambil logo_perusahaan ---
 $sql = "SELECT 
             lp.id, 
             lp.nama_pekerjaan, 
@@ -13,7 +13,8 @@ $sql = "SELECT
             lp.gaji_awal, 
             lp.gaji_akhir, 
             p.nama_perusahaan, 
-            p.lokasi 
+            p.lokasi,
+            p.logo_perusahaan -- Menambahkan kolom logo
         FROM 
             lowongan_pekerjaan lp
         JOIN 
@@ -54,7 +55,6 @@ if ($types) {
 }
 $stmt->execute();
 $result = $stmt->get_result();
-// --- AKHIR LOGIKA PENCARIAN ---
 
 ?>
 <!DOCTYPE html>
@@ -93,7 +93,6 @@ $result = $stmt->get_result();
                     <div class="form-group">
                         <input type="text" name="q" placeholder="Nama Perusahaan atau Pekerjaan" class="form-input" value="<?php echo htmlspecialchars($_GET['q'] ?? ''); ?>">
                     </div>
-                    
                     <div class="form-group">
                         <select class="form-select" name="kategori">
                             <option value="">Pilih Kategori</option>
@@ -102,9 +101,10 @@ $result = $stmt->get_result();
                             <option value="Marketing" <?php if(($_GET['kategori'] ?? '') == 'Marketing') echo 'selected'; ?>>Marketing</option>
                             <option value="Pendidikan" <?php if(($_GET['kategori'] ?? '') == 'Pendidikan') echo 'selected'; ?>>Pendidikan</option>
                             <option value="Akuntansi" <?php if(($_GET['kategori'] ?? '') == 'Akuntansi') echo 'selected'; ?>>Akuntansi</option>
+                            <option value="Manajemen" <?php if(($_GET['kategori'] ?? '') == 'Manajemen') echo 'selected'; ?>>Manajemen</option>
+                            <option value="Sales" <?php if(($_GET['kategori'] ?? '') == 'Sales') echo 'selected'; ?>>Sales</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
                         <select class="form-select" name="lokasi">
                             <option value="">Pilih Lokasi</option>
@@ -113,7 +113,6 @@ $result = $stmt->get_result();
                             <option value="Bandung" <?php if(($_GET['lokasi'] ?? '') == 'Bandung') echo 'selected'; ?>>Bandung</option>
                         </select>
                     </div>
-                    
                     <button type="submit" class="search-btn">Cari Lowongan</button>
                 </form>
             </section>
@@ -126,15 +125,17 @@ $result = $stmt->get_result();
                         <?php while($row = $result->fetch_assoc()): ?>
                             <article class="job-card">
                                 <div class="job-header">
-                                    <h3 class="job-title"><?php echo htmlspecialchars($row['nama_pekerjaan']); ?></h3>
-                                    <span class="company-name"><?php echo htmlspecialchars($row['nama_perusahaan']); ?></span>
+                                    <img src="<?php echo htmlspecialchars($row['logo_perusahaan']); ?>" alt="Logo <?php echo htmlspecialchars($row['nama_perusahaan']); ?>" class="company-logo">
+                                    <div class="job-title-container">
+                                        <h3 class="job-title"><?php echo htmlspecialchars($row['nama_pekerjaan']); ?></h3>
+                                        <span class="company-name"><?php echo htmlspecialchars($row['nama_perusahaan']); ?></span>
+                                    </div>
                                 </div>
                                 <div class="job-details">
                                     <p class="job-category"><i class="fas fa-briefcase"></i> <?php echo htmlspecialchars($row['kategori_pekerjaan']); ?></p>
                                     <p class="job-location"><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($row['lokasi']); ?></p>
                                     <p class="job-salary"><i class="fas fa-money-bill-wave"></i> 
                                         <?php 
-                                            // Format gaji
                                             if (!empty($row['gaji_awal']) && !empty($row['gaji_akhir'])) {
                                                 echo 'Rp ' . number_format($row['gaji_awal']) . ' - ' . number_format($row['gaji_akhir']);
                                             } else {

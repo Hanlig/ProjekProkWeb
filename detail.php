@@ -2,13 +2,13 @@
 session_start();
 require_once 'db.php';
 
-// --- 1. Ambil ID Lowongan & Validasi ---
+// --- 1. Ambil ID Lowongan & Lakukan Validasi ---
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Error: ID lowongan tidak valid.");
 }
 $lowongan_id = intval($_GET['id']);
 
-// --- 2. Ambil data lowongan ---
+// --- 2. Query untuk Mengambil Detail Lowongan ---
 $sql_lowongan = "SELECT lp.*, p.nama_perusahaan, p.lokasi, p.logo_perusahaan 
                  FROM lowongan_pekerjaan lp 
                  JOIN perusahaan p ON lp.perusahaan_id = p.id 
@@ -16,17 +16,34 @@ $sql_lowongan = "SELECT lp.*, p.nama_perusahaan, p.lokasi, p.logo_perusahaan
 $stmt_lowongan = $conn->prepare($sql_lowongan);
 $stmt_lowongan->bind_param("i", $lowongan_id);
 $stmt_lowongan->execute();
-$result = $stmt_lowongan->get_result();
+$result_lowongan = $stmt_lowongan->get_result();
 
-if ($result->num_rows === 0) {
+if ($result_lowongan->num_rows === 0) {
     die("Lowongan tidak ditemukan.");
 }
+$lowongan = $result_lowongan->fetch_assoc();
 
-$lowongan = $result->fetch_assoc();
+// --- 3. Cek Status Login, Role, dan Riwayat Lamaran ---
+$user_logged_in = isset($_SESSION['user_id']);
+$role_valid = false;
+$sudah_melamar = false;
 
-// --- 3. Cek Role User & Status Lamaran (dummy logic sementara) ---
-$role_valid = true; // Ganti dengan logika cek role user sebenarnya
-$sudah_melamar = false; // Ganti dengan query cek apakah user sudah melamar
+if ($user_logged_in) {
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'pencari_kerja') {
+        $role_valid = true;
+    }
+
+    $user_id = $_SESSION['user_id'];
+    $sql_cek_lamaran = "SELECT id FROM lamaran WHERE user_id = ? AND lowongan_id = ?";
+    $stmt_cek_lamaran = $conn->prepare($sql_cek_lamaran);
+    $stmt_cek_lamaran->bind_param("ii", $user_id, $lowongan_id);
+    $stmt_cek_lamaran->execute();
+    $result_cek_lamaran = $stmt_cek_lamaran->get_result();
+    if ($result_cek_lamaran->num_rows > 0) {
+        $sudah_melamar = true;
+    }
+    $stmt_cek_lamaran->close();
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -41,10 +58,12 @@ $sudah_melamar = false; // Ganti dengan query cek apakah user sudah melamar
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <a href="index.php"><img src="IMAGE/batch-logo-removebg-preview.png" alt="Logo"></a>
+                    <a href="index.php">
+                        <img src="IMAGE/batch-logo-removebg-preview.png" alt="Logo" style="max-width: 150px;">
+                    </a>
                 </div>
                 <nav class="user-nav">
-                    <?php if (isset($_SESSION['user_id'])): ?>
+                    <?php if ($user_logged_in): ?>
                         <span style="color: white; margin-right: 15px;">Halo, <?php echo htmlspecialchars($_SESSION['user_email']); ?></span>
                         <a href="logout.php" class="logout-btn">Logout</a>
                     <?php else: ?>
@@ -60,8 +79,11 @@ $sudah_melamar = false; // Ganti dengan query cek apakah user sudah melamar
             <h1 class="section-title">Detail Lowongan Pekerjaan</h1>
             
             <div class="detail-container">
-                <img src="<?php echo htmlspecialchars($lowongan['logo_perusahaan']); ?>" alt="Logo <?php echo htmlspecialchars($lowongan['nama_perusahaan']); ?>" style="max-width: 150px; display: block; margin-bottom: 20px;">
-                
+                <!-- Tampilkan logo perusahaan dengan path lengkap -->
+                <img src="IMAGE/<?php echo htmlspecialchars($lowongan['logo_perusahaan']); ?>" 
+                     alt="Logo <?php echo htmlspecialchars($lowongan['nama_perusahaan']); ?>" 
+                     style="max-width: 150px; display:block; margin-bottom:20px;">
+
                 <h2><?php echo htmlspecialchars($lowongan['nama_pekerjaan']); ?></h2>
                 <div class="detail-info">
                     <p><strong>Perusahaan:</strong> <?php echo htmlspecialchars($lowongan['nama_perusahaan']); ?></p>
@@ -83,14 +105,16 @@ $sudah_melamar = false; // Ganti dengan query cek apakah user sudah melamar
                 </div>
 
                 <div class="apply-button">
-                    <?php if (isset($_SESSION['user_id']) && $role_valid): ?>
-                        <?php if ($sudah_melamar): ?>
-                            <p class="search-btn" style="background-color: #555; cursor: not-allowed;">Anda sudah pernah melamar LOWONGAN ini</p>
+                    <?php if ($user_logged_in): ?>
+                        <?php if ($role_valid): ?>
+                            <?php if ($sudah_melamar): ?>
+                                <p class="search-btn applied">Anda Sudah Melamar</p>
+                            <?php else: ?>
+                                <a href="PengajuanLamaran.php?id=<?php echo $lowongan_id; ?>" class="search-btn">Ajukan Lamaran</a>
+                            <?php endif; ?>
                         <?php else: ?>
-                            <a href="PengajuanLamaran.php?id=<?php echo $lowongan_id; ?>" class="search-btn">Ajukan Lamaran</a>
+                            <p class="search-btn disabled">Hanya Pencari Kerja yang Bisa Melamar</p>
                         <?php endif; ?>
-                    <?php elseif(isset($_SESSION['user_id']) && !$role_valid): ?>
-                        <p class="search-btn" style="background-color: #555; cursor: not-allowed;">Hanya Pencari Kerja yang bisa melamar</p>
                     <?php else: ?>
                         <a href="login.php" class="search-btn">Login untuk Melamar</a>
                     <?php endif; ?>

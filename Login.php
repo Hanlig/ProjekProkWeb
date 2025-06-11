@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Prokweb</title>
+  <title>Login - Progweb</title>
   <link rel="stylesheet" href="CSS/stylelogin.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -12,9 +12,6 @@
     <div class="container">
       <a href="index.php" class="back-button">
         <img src="IMAGE/icont back.png" alt="Back" class="back-icon" />
-      </a>
-      <a href="logout.php">logout
-        
       </a>
       <div class="logo">
         <img src="IMAGE/batch-logo-removebg-preview.png" alt="logo-web" width="50px" height="100px">
@@ -42,11 +39,14 @@
       </div>
 
       <section class="login-section">
-        <h1 class="signin-title">Sign in</h1>
+        <h1 class="signin-title">HALO, LOGIN DI SINI</h1>
 
         <?php
         if (isset($_GET['error']) && $_GET['error'] == 1) {
             echo '<p style="color: #ff6b6b; text-align: center; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px; margin-bottom: 15px;">Username atau password salah!</p>';
+        }
+        if (isset($_GET['success']) && $_GET['success'] == 1) {
+            echo '<p style="color: #2ecc71; text-align: center; background: rgba(0,255,0,0.1); padding: 10px; border-radius: 5px; margin-bottom: 15px;">Akun berhasil dibuat! Silakan login.</p>';
         }
         ?>
 
@@ -65,7 +65,7 @@
           </div>
 
           <div class="form-footer">
-            <a href="register.html">Create your Account</a>
+            <a href="register.php">Create your Account</a>
             <button type="submit" class="submit-btn">Login</button>
           </div>
         </form>
@@ -73,21 +73,15 @@
         <div class="social-icons">
           <p>Or sign in with:</p>
           <div class="social-buttons">
-            <a href="https://accounts.google.com/" class="social-btn google">
-              <i class="fab fa-google"></i>
-            </a>
-            <a href="https://facebook.com/" class="social-btn facebook">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://twitter.com/" class="social-btn twitter">
-              <i class="fab fa-twitter"></i>
-            </a>
+            <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
+            <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
           </div>
         </div>
       </section>
     </div>
   </main>
-  
+
   <footer class="login-footer">
     <div class="container">
       <p><u>Web by Hanli-71220875 & Dandy - 71220873</u></p>

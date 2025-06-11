@@ -270,3 +270,14 @@ body > * {
         padding: 12px;
     }
 }
+
+/* Penyesuaian untuk logo perusahaan di halaman detail */
+.detail-container > img {
+    max-width: 150px;
+    height: auto;
+    background-color: white; /* Memberi latar belakang jika logo transparan */
+    border-radius: 12px;
+    padding: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
