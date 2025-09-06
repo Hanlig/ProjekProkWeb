@@ -1,0 +1,95 @@
+<?php
+// ... (Kode PHP di awal tidak berubah) ...
+session_start();
+require_once 'db.php';
+// --- 1. Ambil ID Lowongan & Lakukan Validasi ---
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    die("Error: ID lowongan tidak valid.");
+}
+$lowongan_id = intval($_GET['id']);
+// --- 2. Query untuk Mengambil Detail Lowongan ---
+$sql_lowongan = "SELECT lp.*, p.nama_perusahaan, p.lokasi, p.logo_perusahaan FROM lowongan_pekerjaan lp JOIN perusahaan p ON lp.perusahaan_id = p.id WHERE lp.id = ?";
+// ... (sisa kode PHP tidak berubah) ...
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Lowongan - <?php echo htmlspecialchars($lowongan['nama_pekerjaan']); ?></title>
+    <link rel="stylesheet" href="CSS/styledetail.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.php"><img src="IMAGE/batch-logo-removebg-preview.png" alt="Logo"></a>
+                </div>
+                <nav class="user-nav">
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <span style="color: white; margin-right: 15px;">Halo, <?php echo htmlspecialchars($_SESSION['user_email']); ?></span>
+                        <a href="logout.php" class="logout-btn">Logout</a>
+                    <?php else: ?>
+                        <a href="login.php" class="login-btn">Login</a>
+                    <?php endif; ?>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="section-title">Detail Lowongan Pekerjaan</h1>
+            
+            <div class="detail-container">
+                <img src="<?php echo htmlspecialchars($lowongan['logo_perusahaan']); ?>" alt="Logo <?php echo htmlspecialchars($lowongan['nama_perusahaan']); ?>" style="max-width: 150px; display: block; margin-bottom: 20px;">
+                
+                <h2><?php echo htmlspecialchars($lowongan['nama_pekerjaan']); ?></h2>
+                <div class="detail-info">
+                    <p><strong>Perusahaan:</strong> <?php echo htmlspecialchars($lowongan['nama_perusahaan']); ?></p>
+                    <p><strong>Kategori:</strong> <?php echo htmlspecialchars($lowongan['kategori_pekerjaan']); ?></p>
+                    <p><strong>Lokasi:</strong> <?php echo htmlspecialchars($lowongan['lokasi']); ?></p>
+                    <p><strong>Jenis Pekerjaan:</strong> <?php echo htmlspecialchars($lowongan['jenis_pekerjaan']); ?></p>
+                    <p><strong>Gaji:</strong> 
+                        <?php 
+                            if (!empty($lowongan['gaji_awal']) && !empty($lowongan['gaji_akhir'])) {
+                                echo 'Rp ' . number_format($lowongan['gaji_awal']) . ' - ' . number_format($lowongan['gaji_akhir']);
+                            } else {
+                                echo 'Tidak ditampilkan';
+                            }
+                        ?>
+                    </p>
+                    <p><strong>Batas Lamaran:</strong> <?php echo date('d F Y', strtotime($lowongan['tanggal_batas_lamaran'])); ?></p>
+                    <p><strong>Deskripsi:</strong><br><?php echo nl2br(htmlspecialchars($lowongan['deskripsi'])); ?></p>
+                    <p><strong>Syarat & Kualifikasi:</strong><br><?php echo nl2br(htmlspecialchars($lowongan['syarat_kualifikasi'])); ?></p>
+                </div>
+
+                <div class="apply-button">
+                    <?php if (isset($_SESSION['user_id']) && $role_valid): ?>
+                        <?php if ($sudah_melamar): ?>
+                            <p class="search-btn" style="background-color: #555; cursor: not-allowed;"><?php echo "Anda sudah pernah melamar LOWONGAN ini"; ?></p>
+                        <?php else: ?>
+                            <a href="PengajuanLamaran.php?id=<?php echo $lowongan_id; ?>" class="search-btn">Ajukan Lamaran</a>
+                        <?php endif; ?>
+                    <?php elseif(isset($_SESSION['user_id']) && !$role_valid): ?>
+                        <p class="search-btn" style="background-color: #555; cursor: not-allowed;">Hanya Pencari Kerja yang bisa melamar</p>
+                    <?php else: ?>
+                        <a href="login.php" class="search-btn">Login untuk Melamar</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p class="footer-text">Web by Hanli-71220875 & Dandy - 71220873</p>
+        </div>
+    </footer>
+</body>
+</html>
+<?php
+$stmt_lowongan->close();
+$conn->close();
+?>
